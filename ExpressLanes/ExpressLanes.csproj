@@ -65,6 +65,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Code\JavaScript.js" />
+    <Content Include="Assets\Code\JavaScript_namespaced.js" />
+    <Content Include="Assets\Code\StyleSheet.css" />
+    <Content Include="Assets\Images\ExpressLanesSign.jpg" />
+    <Content Include="Assets\Images\ExpressLanesSign.png" />
+    <Content Include="Assets\Images\I-5_200x200.png" />
+    <Content Include="Assets\Images\I-90_200x200.png" />
+    <Content Include="Default.html" />
+    <Content Include="favicon.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
