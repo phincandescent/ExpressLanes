@@ -3,139 +3,148 @@ var now;
 
 $(document).ready(function () {
     $("#btnUpdate").click(function () {
-        changeDate();
+        EXPRESSLANES.Controller.changeDate();
     });
-    initialize(new Date());
+    EXPRESSLANES.Controller.initialize(new Date());
 });
 
-//Define Objects
-function Highway(name, dir1, dir2, imgUrl) {
-    this.Name = name;
-    this.ImageUrl = imgUrl;
-    this.Direction1 = dir1;
-    this.Direction2 = dir2;
-    this.Schedule = null;
-}
+var EXPRESSLANES = EXPRESSLANES || { //};
 
-function TimeRange(dir, start, end) {
-    this.Direction = dir;
-    this.Start = start;
-    this.End = end;
-}
+    Model: {
+        //Define Objects
+        Highway: function (name, dir1, dir2, imgUrl) {
+            this.Name = name;
+            this.ImageUrl = imgUrl;
+            this.Direction1 = dir1;
+            this.Direction2 = dir2;
+            this.Schedule = null;
+        },
 
-function Schedule(dayNum, dir1Range, dir2Range) {
-    this.DayNum = dayNum;
-    this.Dir1Range = dir1Range;
-    this.Dir2Range = dir2Range;
-}
+        TimeRange: function (dir, start, end) {
+            this.Direction = dir;
+            this.Start = start;
+            this.End = end;
+        },
 
-//Assign data
-function getI5Data() {
-    /*
-    I-5 Express Lane Schedule
-        Monday-Friday 
-        Southbound - 5 a.m. to 11:00 a.m. 
-        Northbound - 11:15 a.m. to 11 p.m. 
-        Closed: 11:00 p.m. - 5 a.m.
-        Saturday & Sunday 
-        Southbound - 8 a.m. to 1:30 p.m.
-        Northbound - 1:45 p.m. to 11 p.m.
-        Closed: 11:00 p.m. - 8 a.m.
-    */
+        Schedule: function (dayNum, dir1Range, dir2Range) {
+            this.DayNum = dayNum;
+            this.Dir1Range = dir1Range;
+            this.Dir2Range = dir2Range;
+        },
 
-    var I5 = new Highway("I5", "Northbound", "Southbound", "Assets/Images/I-5_200x200.png");
-    I5.Northbound = I5.Direction1;
-    I5.Southbound = I5.Direction2;
+        //Assign data
+        getI5Data: function () {
+            /*
+            I-5 Express Lane Schedule
+                Monday-Friday 
+                Southbound - 5 a.m. to 11:00 a.m. 
+                Northbound - 11:15 a.m. to 11 p.m. 
+                Closed: 11:00 p.m. - 5 a.m.
+                Saturday & Sunday 
+                Southbound - 8 a.m. to 1:30 p.m.
+                Northbound - 1:45 p.m. to 11 p.m.
+                Closed: 11:00 p.m. - 8 a.m.
+            */
 
-    var I5Schedule = [];
-    I5Schedule[0] = new Schedule(0, new TimeRange(I5.Northbound, getToday("1:45 pm"), getToday("11:00 pm")), new TimeRange(I5.Southbound, getToday("8:00 am"), getToday("1:30 pm")))
-    I5Schedule[1] = new Schedule(1, new TimeRange(I5.Northbound, getToday("11:15 am"), getToday("11:00 pm")), new TimeRange(I5.Southbound, getToday("5:00 am"), getToday("11:00 am")))
-    I5Schedule[2] = I5Schedule[1]; I5Schedule[2].DayNum = 2;
-    I5Schedule[3] = I5Schedule[1]; I5Schedule[3].DayNum = 3;
-    I5Schedule[4] = I5Schedule[1]; I5Schedule[4].DayNum = 4;
-    I5Schedule[5] = I5Schedule[1]; I5Schedule[5].DayNum = 5;
-    I5Schedule[6] = I5Schedule[0]; I5Schedule[6].DayNum = 6;
+            var I5 = new EXPRESSLANES.Model.Highway("I5", "Northbound", "Southbound", "Assets/Images/I-5_200x200.png");
+            I5.Northbound = I5.Direction1;
+            I5.Southbound = I5.Direction2;
 
-    I5.Schedule = I5Schedule;
+            var I5Schedule = [];
+            I5Schedule[0] = new EXPRESSLANES.Model.Schedule(0, new EXPRESSLANES.Model.TimeRange(I5.Northbound, getToday("1:45 pm"), getToday("11:00 pm")), new EXPRESSLANES.Model.TimeRange(I5.Southbound, getToday("8:00 am"), getToday("1:30 pm")))
+            I5Schedule[1] = new EXPRESSLANES.Model.Schedule(1, new EXPRESSLANES.Model.TimeRange(I5.Northbound, getToday("11:15 am"), getToday("11:00 pm")), new EXPRESSLANES.Model.TimeRange(I5.Southbound, getToday("5:00 am"), getToday("11:00 am")))
+            I5Schedule[2] = I5Schedule[1]; I5Schedule[2].DayNum = 2;
+            I5Schedule[3] = I5Schedule[1]; I5Schedule[3].DayNum = 3;
+            I5Schedule[4] = I5Schedule[1]; I5Schedule[4].DayNum = 4;
+            I5Schedule[5] = I5Schedule[1]; I5Schedule[5].DayNum = 5;
+            I5Schedule[6] = I5Schedule[0]; I5Schedule[6].DayNum = 6;
 
-    return I5;
-}
+            I5.Schedule = I5Schedule;
 
-function getI90Data() {
-    /*
-    I-90 Express Lane Schedule
-        Monday-Thursday
-        Westbound - 6 a.m. to 12:30 p.m.
-        Eastbound - 2 p.m. to 5 a.m.
-        Friday
-        Westbound - 6 a.m. to 12:30 p.m.
-        Eastbound - 2 p.m. to 5 a.m. Monday morning 
-        Saturday & Sunday
-        Eastbound all weekend beginning at 2 p.m. Friday to 5 a.m. Monday morning
-    */
+            return I5;
+        },
 
-    var I90 = new Highway("I90", "Eastbound", "Westbound", "Assets/Images/I-90_200x200.png");
-    I90.Eastbound = I90.Direction1;
-    I90.Westbound = I90.Direction2;
+        getI90Data: function () {
+            /*
+            I-90 Express Lane Schedule
+                Monday-Thursday
+                Westbound - 6 a.m. to 12:30 p.m.
+                Eastbound - 2 p.m. to 5 a.m.
+                Friday
+                Westbound - 6 a.m. to 12:30 p.m.
+                Eastbound - 2 p.m. to 5 a.m. Monday morning 
+                Saturday & Sunday
+                Eastbound all weekend beginning at 2 p.m. Friday to 5 a.m. Monday morning
+            */
 
-    var I90Schedule = [];
-    I90Schedule[0] = new Schedule(0, new TimeRange(I90.Eastbound, getToday("12:00 am"), getTomorrow("5:00 am")), null);
-    I90Schedule[1] = new Schedule(1, new TimeRange(I90.Eastbound, getToday("2:00 pm"), getTomorrow("5:00 am")), new TimeRange(I90.Westbound, getToday("6:00 am"), getToday("12:30 pm")));
-    I90Schedule[2] = I90Schedule[1]; I90Schedule[2].DayNum = 2;
-    I90Schedule[3] = I90Schedule[1]; I90Schedule[3].DayNum = 3;
-    I90Schedule[4] = I90Schedule[1]; I90Schedule[4].DayNum = 4;
-    I90Schedule[5] = new Schedule(5, new TimeRange(I90.Eastbound, getToday("2:00 pm"), getNextMonday("5:00 am")), new TimeRange(I90.Westbound, getToday("6:00 am"), getToday("12:30 pm")));
-    I90Schedule[6] = new Schedule(6, new TimeRange(I90.Eastbound, getToday("12:00 am"), getNextMonday("5:00 am")), null);
+            var I90 = new EXPRESSLANES.Model.Highway("I90", "Eastbound", "Westbound", "Assets/Images/I-90_200x200.png");
+            I90.Eastbound = I90.Direction1;
+            I90.Westbound = I90.Direction2;
 
-    I90.Schedule = I90Schedule;
+            var I90Schedule = [];
+            I90Schedule[0] = new EXPRESSLANES.Model.Schedule(0, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("12:00 am"), getTomorrow("5:00 am")), null);
+            I90Schedule[1] = new EXPRESSLANES.Model.Schedule(1, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("2:00 pm"), getTomorrow("5:00 am")), new EXPRESSLANES.Model.TimeRange(I90.Westbound, getToday("6:00 am"), getToday("12:30 pm")));
+            I90Schedule[2] = I90Schedule[1]; I90Schedule[2].DayNum = 2;
+            I90Schedule[3] = I90Schedule[1]; I90Schedule[3].DayNum = 3;
+            I90Schedule[4] = I90Schedule[1]; I90Schedule[4].DayNum = 4;
+            I90Schedule[5] = new EXPRESSLANES.Model.Schedule(5, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("2:00 pm"), getNextMonday("5:00 am")), new EXPRESSLANES.Model.TimeRange(I90.Westbound, getToday("6:00 am"), getToday("12:30 pm")));
+            I90Schedule[6] = new EXPRESSLANES.Model.Schedule(6, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("12:00 am"), getNextMonday("5:00 am")), null);
 
-    return I90;
-}
+            I90.Schedule = I90Schedule;
 
-//Process logic
-function initialize(datetime) {
-    now = datetime;
-    setDateTimeSelector(now);
+            return I90;
+        }
+    },
 
-    var I5 = getI5Data();
-    getLanes(I5, datetime);
+    Controller: {
+        //Process logic
+        initialize: function (datetime) {
+            now = datetime;
+            setDateTimeSelector(now);
 
-    var I90 = getI90Data();
-    getLanes(I90, datetime);
-}
+            var I5 = EXPRESSLANES.Model.getI5Data();
+            this.getLanes(I5, datetime);
 
-function changeDate() {
-    var datetime = new Date($("#dateTimeSelect")[0].value);
-    datetime.setHours(datetime.getHours() + (datetime.getTimezoneOffset() / 60));
-    initialize(datetime);
-}
+            var I90 = EXPRESSLANES.Model.getI90Data();
+            this.getLanes(I90, datetime);
+        },
 
-function getLanes(hwy, datetime) {
-    var direction, until;
+        changeDate: function () {
+            var datetime = new Date($("#dateTimeSelect")[0].value);
+            datetime.setHours(datetime.getHours() + (datetime.getTimezoneOffset() / 60));
+            this.initialize(datetime);
+        },
 
-    schedule = hwy.Schedule[datetime.getDay()];
+        getLanes: function getLanes(hwy, datetime) {
+            var direction, until;
 
-    if (schedule.Dir1Range && (datetime > schedule.Dir1Range.Start && datetime < schedule.Dir1Range.End)) {
-        direction = schedule.Dir1Range.Direction;
-        until = schedule.Dir1Range.End;
+            schedule = hwy.Schedule[datetime.getDay()];
+
+            if (schedule.Dir1Range && (datetime > schedule.Dir1Range.Start && datetime < schedule.Dir1Range.End)) {
+                direction = schedule.Dir1Range.Direction;
+                until = schedule.Dir1Range.End;
+            }
+            else if (schedule.Dir2Range && (datetime > schedule.Dir2Range.Start && datetime < schedule.Dir2Range.End)) {
+                direction = schedule.Dir2Range.Direction;
+                until = schedule.Dir2Range.End;
+            }
+            else {
+                direction = null;
+            }
+
+            updatePage(hwy, direction, until);
+        },
+    
+        //PUBLIC.Initialize = initialize,
+        //PUBLIC.ChangeDate = initialize
     }
-    else if (schedule.Dir2Range && (datetime > schedule.Dir2Range.Start && datetime < schedule.Dir2Range.End)) {
-        direction = schedule.Dir2Range.Direction;
-        until = schedule.Dir2Range.End;
-    }
-    else {
-        direction = null;
-    }
-
-    updatePage(hwy, direction, until);
-}
+};
 
 //UI updates
 function updatePage(hwy, direction, until) {
     var $spanDirection = $("#" + hwy.Name + "_direction");
     $spanDirection.text((!direction) ? "Closed" : direction);
     $spanDirection.addClass((!direction) ? "closed" : "open");
-    $spanDirection.removeClass((!direction) ? "open" : "closed");
 
     var $spanUntil = $("#" + hwy.Name + "_until");
     var $spanUntilWhen = $("#" + hwy.Name + "_untilWhen");
