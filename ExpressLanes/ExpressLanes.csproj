@@ -65,7 +65,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Code\JavaScript_old.js" />
     <Content Include="Assets\Code\JavaScript.js" />
     <Content Include="Assets\Code\StyleSheet.css" />
     <Content Include="Assets\Images\ExpressLanesSign.jpg" />
