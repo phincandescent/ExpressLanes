@@ -3,12 +3,12 @@ var now;
 
 $(document).ready(function () {
     $("#btnUpdate").click(function () {
-        EXPRESSLANES.Controller.changeDate();
+        EXPRESSLANES.Processor.changeDate();
     });
-    EXPRESSLANES.Controller.initialize(new Date());
+    EXPRESSLANES.Processor.initialize(new Date());
 });
 
-var EXPRESSLANES = EXPRESSLANES || { //};
+var EXPRESSLANES = EXPRESSLANES || {
 
     Model: {
         //Define Objects
@@ -51,8 +51,8 @@ var EXPRESSLANES = EXPRESSLANES || { //};
             I5.Southbound = I5.Direction2;
 
             var I5Schedule = [];
-            I5Schedule[0] = new EXPRESSLANES.Model.Schedule(0, new EXPRESSLANES.Model.TimeRange(I5.Northbound, getToday("1:45 pm"), getToday("11:00 pm")), new EXPRESSLANES.Model.TimeRange(I5.Southbound, getToday("8:00 am"), getToday("1:30 pm")))
-            I5Schedule[1] = new EXPRESSLANES.Model.Schedule(1, new EXPRESSLANES.Model.TimeRange(I5.Northbound, getToday("11:15 am"), getToday("11:00 pm")), new EXPRESSLANES.Model.TimeRange(I5.Southbound, getToday("5:00 am"), getToday("11:00 am")))
+            I5Schedule[0] = new EXPRESSLANES.Model.Schedule(0, new EXPRESSLANES.Model.TimeRange(I5.Northbound, EXPRESSLANES.Helper.getToday("1:45 pm"), EXPRESSLANES.Helper.getToday("11:00 pm")), new EXPRESSLANES.Model.TimeRange(I5.Southbound, EXPRESSLANES.Helper.getToday("8:00 am"), EXPRESSLANES.Helper.getToday("1:30 pm")))
+            I5Schedule[1] = new EXPRESSLANES.Model.Schedule(1, new EXPRESSLANES.Model.TimeRange(I5.Northbound, EXPRESSLANES.Helper.getToday("11:15 am"), EXPRESSLANES.Helper.getToday("11:00 pm")), new EXPRESSLANES.Model.TimeRange(I5.Southbound, EXPRESSLANES.Helper.getToday("5:00 am"), EXPRESSLANES.Helper.getToday("11:00 am")))
             I5Schedule[2] = I5Schedule[1]; I5Schedule[2].DayNum = 2;
             I5Schedule[3] = I5Schedule[1]; I5Schedule[3].DayNum = 3;
             I5Schedule[4] = I5Schedule[1]; I5Schedule[4].DayNum = 4;
@@ -82,13 +82,13 @@ var EXPRESSLANES = EXPRESSLANES || { //};
             I90.Westbound = I90.Direction2;
 
             var I90Schedule = [];
-            I90Schedule[0] = new EXPRESSLANES.Model.Schedule(0, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("12:00 am"), getTomorrow("5:00 am")), null);
-            I90Schedule[1] = new EXPRESSLANES.Model.Schedule(1, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("2:00 pm"), getTomorrow("5:00 am")), new EXPRESSLANES.Model.TimeRange(I90.Westbound, getToday("6:00 am"), getToday("12:30 pm")));
+            I90Schedule[0] = new EXPRESSLANES.Model.Schedule(0, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, EXPRESSLANES.Helper.getToday("12:00 am"), EXPRESSLANES.Helper.getTomorrow("5:00 am")), null);
+            I90Schedule[1] = new EXPRESSLANES.Model.Schedule(1, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, EXPRESSLANES.Helper.getToday("2:00 pm"), EXPRESSLANES.Helper.getTomorrow("5:00 am")), new EXPRESSLANES.Model.TimeRange(I90.Westbound, EXPRESSLANES.Helper.getToday("6:00 am"), EXPRESSLANES.Helper.getToday("12:30 pm")));
             I90Schedule[2] = I90Schedule[1]; I90Schedule[2].DayNum = 2;
             I90Schedule[3] = I90Schedule[1]; I90Schedule[3].DayNum = 3;
             I90Schedule[4] = I90Schedule[1]; I90Schedule[4].DayNum = 4;
-            I90Schedule[5] = new EXPRESSLANES.Model.Schedule(5, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("2:00 pm"), getNextMonday("5:00 am")), new EXPRESSLANES.Model.TimeRange(I90.Westbound, getToday("6:00 am"), getToday("12:30 pm")));
-            I90Schedule[6] = new EXPRESSLANES.Model.Schedule(6, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, getToday("12:00 am"), getNextMonday("5:00 am")), null);
+            I90Schedule[5] = new EXPRESSLANES.Model.Schedule(5, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, EXPRESSLANES.Helper.getToday("2:00 pm"), EXPRESSLANES.Helper.getNextMonday("5:00 am")), new EXPRESSLANES.Model.TimeRange(I90.Westbound, EXPRESSLANES.Helper.getToday("6:00 am"), EXPRESSLANES.Helper.getToday("12:30 pm")));
+            I90Schedule[6] = new EXPRESSLANES.Model.Schedule(6, new EXPRESSLANES.Model.TimeRange(I90.Eastbound, EXPRESSLANES.Helper.getToday("12:00 am"), EXPRESSLANES.Helper.getNextMonday("5:00 am")), null);
 
             I90.Schedule = I90Schedule;
 
@@ -96,11 +96,11 @@ var EXPRESSLANES = EXPRESSLANES || { //};
         }
     },
 
-    Controller: {
+    Processor: {
         //Process logic
         initialize: function (datetime) {
             now = datetime;
-            setDateTimeSelector(now);
+            EXPRESSLANES.Controller.setDateTimeSelector(now);
 
             var I5 = EXPRESSLANES.Model.getI5Data();
             this.getLanes(I5, datetime);
@@ -132,87 +132,94 @@ var EXPRESSLANES = EXPRESSLANES || { //};
                 direction = null;
             }
 
-            updatePage(hwy, direction, until);
+            EXPRESSLANES.Controller.updatePage(hwy, direction, until);
         },
-    
+
         //PUBLIC.Initialize = initialize,
         //PUBLIC.ChangeDate = initialize
+
+    },
+
+    Controller: {
+        updatePage: function (hwy, direction, until) {
+            var $spanDirection = $("#" + hwy.Name + "_direction");
+            $spanDirection.text((!direction) ? "Closed" : direction);
+            $spanDirection.addClass((!direction) ? "closed" : "open");
+
+            var $spanUntil = $("#" + hwy.Name + "_until");
+            var $spanUntilWhen = $("#" + hwy.Name + "_untilWhen");
+            if (!direction) {
+                $spanUntil.css("visibility", "hidden");
+            }
+            else {
+                $spanUntil.css("visibility", "visible");
+                $spanUntilWhen.text(EXPRESSLANES.Helper.fomatTime(until));
+            }
+
+            var $img = $("#" + hwy.Name + "_img");
+            $img.attr("src", hwy.ImageUrl);
+        },
+
+        setDateTimeSelector: function (datetime) {
+            var y = datetime.getFullYear();
+            var mon = EXPRESSLANES.Helper.setLeadingZero(datetime.getMonth() + 1);
+            var d = EXPRESSLANES.Helper.setLeadingZero(datetime.getDate());
+            var h = EXPRESSLANES.Helper.setLeadingZero(datetime.getHours());
+            var min = EXPRESSLANES.Helper.setLeadingZero(datetime.getMinutes());
+
+            var newDateTime = y + "-" + mon + "-" + d + "T" + h + ":" + min;
+            $("#dateTimeSelect")[0].value = newDateTime;
+        }
+    },
+
+    Helper: {
+        //returns a time string formatted as hh:mm ampm on a 12-hour clock
+        fomatTime: function (datetime) { 
+            var h_24 = datetime.getHours();
+            var h = datetime.getHours() % 12;
+            if (h === 0) h = 12;
+            var m = datetime.getMinutes();
+            m = (m < 10 ? "0" + m : m);
+            return (h < 10 ? h : h) + ":" + m + (h_24 < 12 ? ' am' : ' pm');
+        },
+
+        //returns a date object representing today at a specified time
+        getToday: function (time) { 
+            if (!time) time = "12:00 am";
+            var theDay = new Date(now.toDateString() + " " + time);
+            return theDay;
+        },
+
+        //returns a date object representing tomorrow at a specified time
+        getTomorrow: function (time) { 
+            if (!time) time = "12:00 am";
+
+            var theDay = now;
+            var ms = theDay.getTime() + 86400000;
+            theDay = new Date(new Date(ms).toDateString() + " " + time);
+            return theDay;
+        },
+
+        //returns a date object representing the following Monday at a specified time
+        getNextMonday: function (time) { 
+            if (!time) time = "12:00 am";
+
+            theDay = new Date();
+            var monday = 1;
+            var safe = 6; //loop breaker
+            var safeCheck = 0;
+            while (theDay.getDay() != monday && safeCheck < safe) {
+                var ms = theDay.getTime() + 86400000;
+                theDay = new Date(ms);
+                safeCheck++;
+            }
+            theDay = new Date(theDay.toDateString() + " " + time);
+            return theDay;
+        },
+
+        //adds a leading zero to single-digit numbers
+        setLeadingZero: function (n) { 
+            return (!isNaN(n) && n < 10) ? "0" + n : n;
+        }
     }
 };
-
-//UI updates
-function updatePage(hwy, direction, until) {
-    var $spanDirection = $("#" + hwy.Name + "_direction");
-    $spanDirection.text((!direction) ? "Closed" : direction);
-    $spanDirection.addClass((!direction) ? "closed" : "open");
-
-    var $spanUntil = $("#" + hwy.Name + "_until");
-    var $spanUntilWhen = $("#" + hwy.Name + "_untilWhen");
-    if (!direction) {
-        $spanUntil.css("visibility", "hidden");
-    }
-    else {
-        $spanUntil.css("visibility", "visible");
-        $spanUntilWhen.text(fomatTime(until));
-    }
-
-    var $img = $("#" + hwy.Name + "_img");
-    $img.attr("src", hwy.ImageUrl);
-}
-
-function setDateTimeSelector(datetime) {
-    var y = datetime.getFullYear();
-    var mon = setLeadingZero(datetime.getMonth() + 1);
-    var d = setLeadingZero(datetime.getDate());
-    var h = setLeadingZero(datetime.getHours());
-    var min = setLeadingZero(datetime.getMinutes());
-
-    var newDateTime = y + "-" + mon + "-" + d + "T" + h + ":" + min;
-    $("#dateTimeSelect")[0].value = newDateTime;
-}
-
-//Helpers
-function fomatTime(datetime) { //returns a time string formatted as hh:mm ampm on a 12-hour clock
-    var h_24 = datetime.getHours();
-    var h = datetime.getHours() % 12;
-    if (h === 0) h = 12;
-    var m = datetime.getMinutes();
-    m = (m < 10 ? "0" + m : m);
-    return (h < 10 ? h : h) + ":" + m + (h_24 < 12 ? ' am' : ' pm');
-}
-
-function getToday(time) { //returns a date object representing today at a specified time
-    if (!time) time = "12:00 am";
-    var theDay = new Date(now.toDateString() + " " + time);
-    return theDay;
-}
-
-function getTomorrow(time) { //returns a date object representing tomorrow at a specified time
-    if (!time) time = "12:00 am";
-
-    var theDay = now;
-    var ms = theDay.getTime() + 86400000;
-    theDay = new Date(new Date(ms).toDateString() + " " + time);
-    return theDay;
-}
-
-function getNextMonday(time) { //returns a date object representing the following Monday at a specified time
-    if (!time) time = "12:00 am";
-
-    theDay = new Date();
-    var monday = 1;
-    var safe = 6; //loop breaker
-    var safeCheck = 0;
-    while (theDay.getDay() != monday && safeCheck < safe) {
-        var ms = theDay.getTime() + 86400000;
-        theDay = new Date(ms);
-        safeCheck++;
-    }
-    theDay = new Date(theDay.toDateString() + " " + time);
-    return theDay;
-}
-
-function setLeadingZero(n) { //adds a leading zero to single-digit numbers
-    return (!isNaN(n) && n < 10) ? "0" + n : n;
-}
-
