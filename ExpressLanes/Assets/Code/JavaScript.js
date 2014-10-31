@@ -162,6 +162,7 @@ $(document).ready(function () {
         var $spanDirection = $("#" + hwy.Name + "_direction");
         $spanDirection.text((!direction) ? "Closed" : direction);
         $spanDirection.addClass((!direction) ? "closed" : "open");
+        $spanDirection.removeClass((!direction) ? "open" : "closed");
 
         var $spanUntil = $("#" + hwy.Name + "_until");
         var $spanUntilWhen = $("#" + hwy.Name + "_untilWhen");
