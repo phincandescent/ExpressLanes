@@ -137,12 +137,13 @@ function updatePage(hwy, direction, until) {
     $spanDirection.addClass((!direction) ? "closed" : "open");
     $spanDirection.removeClass((!direction) ? "open" : "closed");
 
+    var $spanUntil = $("#" + hwy.Name + "_until");
+    var $spanUntilWhen = $("#" + hwy.Name + "_untilWhen");
     if (!direction) {
-        var $spanUntil = $("#" + hwy.Name + "_until");
         $spanUntil.css("visibility", "hidden");
     }
     else {
-        var $spanUntilWhen = $("#" + hwy.Name + "_untilWhen");
+        $spanUntil.css("visibility", "visible");
         $spanUntilWhen.text(fomatTime(until));
     }
 
