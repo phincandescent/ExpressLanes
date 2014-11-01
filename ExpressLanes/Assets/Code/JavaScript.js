@@ -1,6 +1,4 @@
 ﻿
-var now;
-
 if (typeof (EXPRESSLANES) == "undefined") {
     EXPRESSLANES = {}
 }
@@ -11,6 +9,8 @@ $(document).ready(function () {
     });
     EXPRESSLANES.Processor.Initialize(new Date());
 });
+
+var now = null;
 
 //EXPRESSLANES.Model
 (function (PUBLIC) { 
@@ -183,10 +183,10 @@ $(document).ready(function () {
         var helper = EXPRESSLANES.Helper;
 
         var y = datetime.getFullYear();
-        var mon = EXPRESSLANES.Helper.SetLeadingZero(datetime.getMonth() + 1);
-        var d = EXPRESSLANES.Helper.SetLeadingZero(datetime.getDate());
-        var h = EXPRESSLANES.Helper.SetLeadingZero(datetime.getHours());
-        var min = EXPRESSLANES.Helper.SetLeadingZero(datetime.getMinutes());
+        var mon = helper.SetLeadingZero(datetime.getMonth() + 1);
+        var d = helper.SetLeadingZero(datetime.getDate());
+        var h = helper.SetLeadingZero(datetime.getHours());
+        var min = helper.SetLeadingZero(datetime.getMinutes());
 
         var newDateTime = y + "-" + mon + "-" + d + "T" + h + ":" + min;
         $("#dateTimeSelect")[0].value = newDateTime;
