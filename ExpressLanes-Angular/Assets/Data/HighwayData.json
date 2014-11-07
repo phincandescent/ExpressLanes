@@ -1,0 +1,204 @@
+﻿[
+    {
+        "Name": "I5",
+        "Status": {
+            "Direction": null,
+            "Until": null
+        },
+        "ImageUrl": "Assets/Images/I-5_200x200.png",
+        "Schedule": [
+            {
+                "Day": "Sunday",
+                "Direction1": {
+                    "Description": "Northbound",
+                    "Start": "Today@1:45 pm",
+                    "End": "Today@11:00 pm"
+                },
+                "Direction2": {
+                    "Description": "Southbound",
+                    "Start": "Today@8:00 am",
+                    "End": "Today@1:30 pm"
+                }
+            },
+            {
+                "Day": "Monday",
+                "Direction1": {
+                    "Description": "Northbound",
+                    "Start": "Today@11:15 am",
+                    "End": "Today@11:00 pm"
+                },
+                "Direction2": {
+                    "Description": "Southbound",
+                    "Start": "Today@5:00 am",
+                    "End": "Today@11:00 am"
+                }
+            },
+            {
+                "Day": "Tuesday",
+                "Direction1": {
+                    "Description": "Northbound",
+                    "Start": "Today@11:15 am",
+                    "End": "Today@11:00 pm"
+                },
+                "Direction2": {
+                    "Description": "Southbound",
+                    "Start": "Today@5:00 am",
+                    "End": "Today@11:00 am"
+                }
+            },
+            {
+                "Day": "Wednesday",
+                "Direction1": {
+                    "Description": "Northbound",
+                    "Start": "Today@11:15 am",
+                    "End": "Today@11:00 pm"
+                },
+                "Direction2": {
+                    "Description": "Southbound",
+                    "Start": "Today@5:00 am",
+                    "End": "Today@11:00 am"
+                }
+            },
+            {
+                "Day": "Thursday",
+                "Direction1": {
+                    "Description": "Northbound",
+                    "Start": "Today@11:15 am",
+                    "End": "Today@11:00 pm"
+                },
+                "Direction2": {
+                    "Description": "Southbound",
+                    "Start": "Today@5:00 am",
+                    "End": "Today@11:00 am"
+                }
+            },
+            {
+                "Day": "Friday",
+                "Direction1": {
+                    "Description": "Northbound",
+                    "Start": "Today@11:15 am",
+                    "End": "Today@11:00 pm"
+                },
+                "Direction2": {
+                    "Description": "Southbound",
+                    "Start": "Today@5:00 am",
+                    "End": "Today@11:00 am"
+                }
+            },
+            {
+                "Day": "Saturday",
+                "Direction1": {
+                    "Description": "Northbound",
+                    "Start": "Today@1:45 pm",
+                    "End": "Today@11:00 pm"
+                },
+                "Direction2": {
+                    "Description": "Southbound",
+                    "Start": "Today@8:00 am",
+                    "End": "Today@1:30 pm"
+                }
+            }
+        ]
+    },
+    {
+        "Name": "I90",
+        "Status": {
+            "Direction": null,
+            "Until": null 
+        },
+        "ImageUrl": "Assets/Images/I-90_200x200.png",
+        "Schedule": [
+            {
+                "Day": "Sunday",
+                "Direction1": {
+                    "Description": "Eastbound",
+                    "Start": "Today@12:00 am",
+                    "End": "Tomorrow@5:00 am"
+                },
+                "Direction2": {
+                    "Description": "Westbound",
+                    "Start": null,
+                    "End": null
+                }
+            },
+            {
+                "Day": "Monday",
+                "Direction1": {
+                    "Description": "Eastbound",
+                    "Start": "Today@2:00 pm",
+                    "End": "Tomorrow@5:00 am"
+                },
+                "Direction2": {
+                    "Description": "Westbound",
+                    "Start": "Today@6:00 am",
+                    "End": "Today@12:30 pm"
+                }
+            },
+            {
+                "Day": "Tuesday",
+                "Direction1": {
+                    "Description": "Eastbound",
+                    "Start": "Today@2:00 pm",
+                    "End": "Tomorrow@5:00 am"
+                },
+                "Direction2": {
+                    "Description": "Westbound",
+                    "Start": "Today@6:00 am",
+                    "End": "Today@12:30 pm"
+                }
+            },
+            {
+                "Day": "Wednesday",
+                "Direction1": {
+                    "Description": "Eastbound",
+                    "Start": "Today@2:00 pm",
+                    "End": "Tomorrow@5:00 am"
+                },
+                "Direction2": {
+                    "Description": "Westbound",
+                    "Start": "Today@6:00 am",
+                    "End": "Today@12:30 pm"
+                }
+            },
+            {
+                "Day": "Thursday",
+                "Direction1": {
+                    "Description": "Eastbound",
+                    "Start": "Today@2:00 pm",
+                    "End": "Tomorrow@5:00 am"
+                },
+                "Direction2": {
+                    "Description": "Westbound",
+                    "Start": "Today@6:00 am",
+                    "End": "Today@12:30 pm"
+                }
+            },
+            {
+                "Day": "Friday",
+                "Direction1": {
+                    "Description": "Eastbound",
+                    "Start": "Today@2:00 pm",
+                    "End": "Monday@5:00 am"
+                },
+                "Direction2": {
+                    "Description": "Westbound",
+                    "Start": "Today@6:00 am",
+                    "End": "Today@12:30 pm"
+                }
+            },
+            {
+                "Day": "Saturday",
+                "Direction1": {
+                    "Description": "Eastbound",
+                    "Start": "Today@12:00 am",
+                    "End": "Monday@5:00 am"
+                },
+                "Direction2": {
+                    "Description": "Westbound",
+                    "Start": null,
+                    "End": null
+                }
+            }
+        ]
+    }
+]

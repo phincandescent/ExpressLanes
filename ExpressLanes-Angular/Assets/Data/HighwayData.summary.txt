@@ -1,0 +1,20 @@
+﻿I-5 Express Lane Schedule
+    Monday-Friday 
+    Southbound - 5 a.m. to 11:00 a.m. 
+    Northbound - 11:15 a.m. to 11 p.m. 
+    Closed: 11:00 p.m. - 5 a.m.
+    Saturday & Sunday 
+    Southbound - 8 a.m. to 1:30 p.m.
+    Northbound - 1:45 p.m. to 11 p.m.
+    Closed: 11:00 p.m. - 8 a.m.
+
+	
+I-90 Express Lane Schedule
+    Monday-Thursday
+    Westbound - 6 a.m. to 12:30 p.m.
+    Eastbound - 2 p.m. to 5 a.m.
+    Friday
+    Westbound - 6 a.m. to 12:30 p.m.
+    Eastbound - 2 p.m. to 5 a.m. Monday morning 
+    Saturday & Sunday
+    Eastbound all weekend beginning at 2 p.m. Friday to 5 a.m. Monday morning

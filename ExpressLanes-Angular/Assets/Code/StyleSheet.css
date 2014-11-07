@@ -1,0 +1,123 @@
+﻿body {
+    font-family: sans-serif;
+}
+
+article { 
+  overflow:hidden;
+}
+
+article section {
+   min-height: 200px;
+   padding: 10px;
+}
+
+header {
+     margin-bottom: 50px;
+}
+
+header img {
+    width: 100%;
+}
+
+aside {
+    width: 300px;
+    margin: 30px auto;
+}
+
+.highway {
+    width: 45%;
+    text-align: center;
+    margin: 0px auto;
+    border: 2px dashed #ccc;
+}
+
+.hwyImage {
+    height: 200px;
+    width: 200px;
+}
+
+.dir {
+    font-size: 6em;
+    color: green;
+}
+
+.until {
+    font-size: 4em;
+}
+
+.I5 {
+  float:left; 
+}
+
+.I90 { 
+  overflow:hidden;
+  min-height:170px;
+}
+
+@media screen and (max-width: 1150px) {
+    .dir {
+        font-size: 4em;
+    }
+
+    .until {
+        font-size: 3em;
+    }
+
+    .hwyImage {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .dir {
+        font-size: 3em;
+    }
+
+    .until {
+        font-size: 2em;
+    }
+
+    .hwyImage {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    header {
+        margin-bottom: 0px;
+    }
+
+    .I5 {
+        float: none;
+        width: auto;
+        border: 0;
+        border-bottom: 2px dashed #ccc;
+    }
+
+    .I90 {
+        float: none;
+        width: auto;
+        border: 0;
+        border-bottom: 2px dashed #ccc;
+    }
+
+    .hwyImage {
+        height: 75px;
+        width: 75px;
+    }
+}
+
+/*.open {
+    color: green;
+}*/
+
+.closed {
+    color: red;
+    /*content: "Closed";*/
+}
+
+.visHidden {
+     //visibility: hidden;
+  }
