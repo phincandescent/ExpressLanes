@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Data\HighwayData.json" />
+    <Content Include="Assets\Code\Frameworks\AngularJS\1.3.0-rc.5\angular.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -67,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Code\app.js" />
+    <Content Include="Assets\Code\Frameworks\AngularJS\1.3.0-rc.5\angular.min.js" />
+    <Content Include="Assets\Code\Frameworks\jQuery\2.1.1\jquery.min.js" />
     <Content Include="Assets\Code\StyleSheet.css" />
     <Content Include="Assets\Data\HighwayData.summary.txt" />
     <Content Include="Assets\Images\ExpressLanesSign.jpg" />
@@ -81,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
