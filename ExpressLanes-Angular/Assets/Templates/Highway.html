@@ -1,5 +1,5 @@
 ﻿<section class="highway {{hwy.Name}}">
     <p><img id="{{hwy.Name}}_img" class="hwyImage" ng-src="{{hwy.ImageUrl}}" /></p>
-    <p><span id="{{hwy.Name}}_direction" class="dir" ng-class="{closed: hwy.Status.Direction == 'Closed'}">{{hwy.Status.Direction}}</span></p>
+    <p><span id="{{hwy.Name}}_direction" class="dir" ng-class="{open: hwy.Status.Direction != 'Closed', closed: hwy.Status.Direction == 'Closed'}">{{hwy.Status.Direction}}</span></p>
     <p class="" ng-class="{visHidden: hwy.Status.Direction == 'Closed'}"><span id="{{hwy.Name}}_until" class="until">Until <span id="{{hwy.Name}}_untilWhen">{{hwy.Status.Until}}</span></span></p>
 </section>

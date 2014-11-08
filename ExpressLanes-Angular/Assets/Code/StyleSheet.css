@@ -20,8 +20,27 @@ header img {
 }
 
 aside {
-    width: 300px;
+    position: relative;
+    width: 400px;
     margin: 30px auto;
+}
+
+.datetime-label {
+    width: 80px;
+    font-size: 2em;
+}
+
+.datetime-row {
+    margin-bottom: 10px;
+}
+
+input {
+    position: absolute;
+    left: 90px;
+    width: 300px;
+    text-align: left;
+    font-size: 2em;
+    margin-bottom:10px;
 }
 
 .highway {
@@ -38,7 +57,14 @@ aside {
 
 .dir {
     font-size: 6em;
+}
+
+.dir.open {
     color: green;
+}
+
+.dir.closed {
+    color: red;
 }
 
 .until {
@@ -67,6 +93,21 @@ aside {
         height: 150px;
         width: 150px;
     }
+   
+    aside {
+        width: 300px;
+        margin: 20px auto;
+    }
+
+    input {
+        font-size: 1.5em;
+        left: 70px;
+        width: 225px;
+    }
+    
+    .datetime-label {
+        font-size: 1.5em;
+    }
 }
 
 @media screen and (max-width: 770px) {
@@ -81,6 +122,22 @@ aside {
     .hwyImage {
         height: 100px;
         width: 100px;
+    }
+
+    .datetime-label {
+        font-size: 1em;
+        margin: 10px auto;
+    }
+    
+    aside {
+        width: 205px;
+        margin: 5px auto;
+    }
+
+    input {
+        font-size: 1em;
+        width: 150px;
+        left: 50px;
     }
 }
 
@@ -108,16 +165,3 @@ aside {
         width: 75px;
     }
 }
-
-/*.open {
-    color: green;
-}*/
-
-.closed {
-    color: red;
-    /*content: "Closed";*/
-}
-
-.visHidden {
-     //visibility: hidden;
-  }

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="Assets/Code/StyleSheet.css" />
 </head>
 <body ng-app="ExpressLanes" ng-controller="HighwayController as hwyCtrl">
-
     <header>
         <img src="Assets/Images/ExpressLanesSign.jpg" />
     </header>
@@ -18,8 +17,8 @@
     </article>
 
     <aside>
-        Select a different date & time:<br />
-        <input id="dateTimeSelect" type="datetime-local" ng-model="now" ng-change="update()">
+        <div class="datetime-row"><span class="datetime-label">Date:</span><input id="dateSelect" type="date" ng-model="now" ng-change="update()" /></div>
+        <div class="datetime-row"><span class="datetime-label">Time:</span><input id="dateSelect" type="time" ng-model="now" ng-change="update()" /></div>
     </aside>
 </body>
 </html>
