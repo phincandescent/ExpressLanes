@@ -3,7 +3,8 @@
 
     app.controller("HighwayController", ['$scope', '$http', function ($scope, $http) {
         $scope.highways = null;
-        $scope.now = new Date();
+        var now = new Date();
+        $scope.now = new Date(now.getFullYear(), now.getMonth(), now.getDay(), now.getHours(), now.getMinutes());
 
 
         $http.get("Assets/Data/HighwayData.json").success(function (data) {
@@ -29,12 +30,12 @@
                 hwy.Status.Direction = schedule.Direction1.Description;
                 hwy.Status.Until = $scope.formatTime(schedule.Direction1.End);
             }
-            //During direction 2
+                //During direction 2
             else if (dtStart2 && dtEnd2 && (datetime > dtStart2 && datetime < dtEnd2)) {
                 hwy.Status.Direction = schedule.Direction2.Description;
                 hwy.Status.Until = $scope.formatTime(schedule.Direction2.End);
             }
-            //Closed
+                //Closed
             else {
                 hwy.Status.Direction = "Closed";
                 hwy.Status.Until = $scope.getNextOpen(schedule, datetime);
@@ -68,7 +69,7 @@
             }
 
             //Add the direction when it opens again
-            var direction = (until == dtStart1) ? schedule.Direction1.Description : schedule.Direction2.Description;                
+            var direction = (until == dtStart1) ? schedule.Direction1.Description : schedule.Direction2.Description;
 
             return $scope.formatTime((until == dtStart1) ? strStart1 : strStart2) + " (" + direction + ")"
         }
@@ -132,7 +133,6 @@
                 }
             }
         };
-
     }])
     .directive("highway", function () {
         return {
