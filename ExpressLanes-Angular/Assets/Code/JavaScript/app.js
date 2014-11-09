@@ -139,6 +139,12 @@
             restrict: "E",
             templateUrl: "Assets/Templates/Highway.html"
         };
+    })
+    .directive("onrampSign", function () {
+        return {
+            restrict: "E",
+                templateUrl: "Assets/Templates/OnrampSign.html"
+        };
     });
 })();
 
