@@ -1,5 +1,6 @@
 ﻿body {
     font-family: sans-serif;
+    margin-top: 0px;
 }
 
 article { 
@@ -21,7 +22,7 @@ header img {
 
 aside {
     position: relative;
-    width: 400px;
+    width: 700px;
     margin: 30px auto;
 }
 
@@ -35,12 +36,11 @@ aside {
 }
 
 input {
-    position: absolute;
-    left: 90px;
     width: 225px;
     text-align: left;
     font-size: 2em;
-    margin-bottom:10px;
+    margin: 0 15px 10px 5px;
+    padding-left: 10px;
 }
 
 .highway {
@@ -95,14 +95,14 @@ input {
     }
    
     aside {
-        width: 300px;
+        width: 600px;
         margin: 20px auto;
     }
 
     input {
         font-size: 1.5em;
         left: 70px;
-        width: 225px;
+        width: 175px;
     }
     
     .datetime-label {
@@ -130,17 +130,18 @@ input {
     }
     
     aside {
-        width: 205px;
+        width: 440px;
         margin: 5px auto;
     }
 
     input {
         font-size: 1em;
-        width: 150px;
+        width: 130px;
         left: 50px;
     }
 }
 
+/* TODO: fix inputs to wrap here */ 
 @media screen and (max-width: 600px) {
     header {
         margin-bottom: 0px;
@@ -164,4 +165,8 @@ input {
         height: 75px;
         width: 75px;
     }
+
+.datetime-row {
+    margin-top: 15px;
+}
 }
